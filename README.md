@@ -56,15 +56,7 @@
     **Reference**
     
         https://www.youtube.com/watch?v=_B93xM5TPuI&list=PLoqCAsfoCubrObEWVK2zHtdb5D-YUv9G5&index=1
-        
-        https://www.youtube.com/watch?v=Q-0Rd-la7PQ&list=PLoqCAsfoCubrObEWVK2zHtdb5D-YUv9G5&index=2
-
-        https://www.youtube.com/watch?v=cGXRK6xVUGw&list=PLoqCAsfoCubrObEWVK2zHtdb5D-YUv9G5&index=11
-
-        https://www.youtube.com/watch?v=mnqQ4y2JIC0&list=PLoqCAsfoCubrObEWVK2zHtdb5D-YUv9G5&index=3
-
-        https://www.youtube.com/watch?v=wCMDwngoxUM&list=PLoqCAsfoCubrObEWVK2zHtdb5D-YUv9G5&index=12
-        
+      
         
         
 4. **2XX Status Codes**    
@@ -105,6 +97,10 @@
         
         A 206 Partial Content status code can be used for a variety of requests and typically indicates that the server has fulfilled a partial request for a resource. For example, if a client is only looking for a specific portion, or range, of a specific resource or page. Another example of where a 206 status code is used is in video. A client may only load video in pieces as to not have to wait for the video to buffer or load, helping to avoid a negative user experience where a user would have to wait longer before the video plays. This is normal best practice among HTTP video players to avoid bandwidth and perceived latency issues.
 
+
+ **Reference**
+        
+        https://www.youtube.com/watch?v=Q-0Rd-la7PQ&list=PLoqCAsfoCubrObEWVK2zHtdb5D-YUv9G5&index=2
 
 
 
