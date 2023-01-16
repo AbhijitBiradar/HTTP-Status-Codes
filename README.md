@@ -98,14 +98,104 @@
         A 206 Partial Content status code can be used for a variety of requests and typically indicates that the server has fulfilled a partial request for a resource. For example, if a client is only looking for a specific portion, or range, of a specific resource or page. Another example of where a 206 status code is used is in video. A client may only load video in pieces as to not have to wait for the video to buffer or load, helping to avoid a negative user experience where a user would have to wait longer before the video plays. This is normal best practice among HTTP video players to avoid bandwidth and perceived latency issues.
 
 
- **Reference**
+    **Reference**
         
         https://www.youtube.com/watch?v=Q-0Rd-la7PQ&list=PLoqCAsfoCubrObEWVK2zHtdb5D-YUv9G5&index=2
 
 
+5. **3XX: Redirection** 
+
+        The 3xx status codes are used in cases of URL redirection. Websites are always changing and evolving, so there may be times where marketers need to direct users to an updated, or different page. Redirects help alleviate users from having to search for what they are looking for and maintain your ranking in search engines. The redirect actions may be carried out by the browser automatically or may require additional interaction from users. The 3xx HTTP status codes are vital for SEO (Search Engine Optimization) and user experience, as well as tell search engines what content you want them to crawl and index. If not properly implemented, users may be directed to an unintended location, which could result in a 4xx status code and could affect SEO quality scores.
 
 
+    **Status Code 300: “Multiple Choices.”**
 
+         Sometimes, there may be multiple possible resources the server can respond with to fulfill your browser’s request. A 300 status code means that your browser now needs to choose between them. This may occur when there are multiple file type extensions available, or if the server is experiencing word sense disambiguation.
+
+        The 300 Multiple Choices status code indicates that a resource has moved and can redirect to multiple locations. In this case the user must decide which resource to use. The server may indicate a preferred choice and that should be indicated in the header field where the user agent could redirect to the preferred choice automatically. In practical use, this status code is rarely used as there is no standardized way to choose from multiple responses. See RFC7231, Section 6.4.1 for more information. 
+        
+    **Status Code 301: Moved Permanently**
+
+        “The requested resource has been moved permanently.” This code is delivered when a web page or resource has been permanently replaced with a different resource. It is used for permanent URL redirection.
+
+         A 301 Moved Permanently status code is utilized to indicate that a target resource has been moved to a permanent location. The 301 status code tells the browser/client to use this new location or URL going forward in the header. Along with the 301 status code, the new URL will be given in the response as well as update any URLs in the previous location(s), along with updating to the new URL. See RFC7231, Section 6.4.2 for more information.
+
+
+    **Status Code 302: Found**
+    
+        “The requested resource has moved, but was found.” This code is used to indicate that the requested resource was found, just not at the location where it was expected. It is used for temporary URL redirection.
+
+        A 302 Found status code indicates to a client/browser that a resource that they are accessing is temporarily located under a different location. Unlike the 301 status code, a 302 status code indicates a temporary move, so the client should not automatically update its links to the new location, as again, it is meant to be temporary. An example of where the 302 status code should be used if there are multiple URLs, but they could be served in different languages. A user may arrive at specific URL, but the client may redirect them automatically to the proper page based on their browser settings and use this on subsequent visits. It is noted that in some cases, browsers may change a request from POST to GET. In the case that this action is not favorable, a 307 status code should be used. See RFC7231, Section 6.4.3 for more information.  
+
+
+    **Status Code 303: See Other**
+    
+        Understanding a 303 status code requires that you know the difference between the four primary HTTP request methods. Essentially, a 303 code tells your browser that it found the resource your browser requested via POST, PUT, or DELETE. However, to retrieve it using GET, you need to make the appropriate request to a different URL than the one you previously used.
+
+        A status code 303 See Other indicates that a server will be redirecting the client/browser to another resource. The resource will be indicated as a URL the header field. Unlike the 301 and 302 status codes, it does not mean a resource has temporarily or permanently move, its intent is to specify the URL to where the response to the specific request can be found via a GET request. 303 status codes should not be cached, however, the response to the subsequent request may be cached. A typical use of the 303 status code would be to ensure users do not accidentally resubmit form data via a POST request. They should be directed to a new page. If not, they may unknowingly click the back button in their browser, which may ask them to resubmit again, which leads to unnecessary duplicate submissions. See RFC7231, Section 6.4.4 for more information.  
+        
+        
+    **Status Code 304: Not Modified**
+    
+        “The requested resource has not been modified since the last time you accessed it.” This code tells the browser that the resources stored in the browser cache haven’t changed. It’s used to speed up web page delivery by reusing previously-downloaded resources.
+
+        A status code of 304 Not Modified is sent in response to a conditional GET or HEAD request. Clients/browsers can send a conditional request, such as If-Match, If-None-Match, If-Modified-Since, If-Unmodified-Since, or If-Range, asking if a specific resource has been modified since a specific date/time. This is done only if the client has previously accessed, downloaded, and saved the resource. If it has been modified since that specific date/time last accessed, the server will return a 200 OK status code. If it has not been changed since that date/time, the 304 status code is sent as the response, indicating that the saved resource should be served since it has not been modified since the last time it was accessed. See RFC7232, Section 4.1 for more information.         
+        
+        
+    **Status Code 305: Use Proxy**
+    
+        The 305 Use Proxy status code is a deprecated status code that is no longer used due to security consideration. It was used to indicate to a client that the resource they were accessing must be accessed via a proxy. For more information on the 305 Use Proxy status code, see RFC7231, Section 6.4.5         
+        
+        
+    **Status Code 306: Unused**
+    
+        Like the 305 status code, the 306 Unused status was originally known as Switch Proxy. The 306 status code was used in a previous specification. Its intention was to be used as in indication to the client that subsequent requests to a resource should use the proxy that was specified. This was deemed as a security issue, so it is no longer used. For more information on the 306 Unused status code, see RFC7231, Section 6.4.6        
+        
+        
+    **Status Code 307: “Temporary Redirect.”**
+    
+        This status code has replaced 302 “Found” as the appropriate action when a resource has been temporarily moved to a different URL. Unlike the 302 status code, it does not allow the HTTP method to change.
+
+        Like the 302 Found redirect status code, the 307 Temporary Redirect status code indicates to the client/browser that a resource or document is available at a different, temporary URL and returns that URL. Since the redirection is temporary and could change, the browser/client should continue to access the current URL for subsequent requests. The main difference between the 302 status code and the 307 status code is that the 307 status code does not allow changing requests from a POST request to a GET request, so if the client requested POST request, it be redirected and initiate the POST request again. See RFC7231, Section 6.4.7          
+        
+        
+    **Status Code 308: “Permanent Redirect.”**
+    
+        The 308 status code is the successor to the 301 “Moved Permanently” code. It does not allow the HTTP method to change and indicates that the requested resource is now permanently located at a new URL.
+
+        A 308 Permanent Redirect status code is a cacheable status code (unless cache controls are implemented) that indicates that a target resource is now located at a permanent URL and subsequent requests should be directed to that URL as well. Additionally, the client should update any old bookmarks to the new location. The 308 status code is very similar to the 301 status code, however, if a 308 status code is sent, the client has to initiate and send the same request on the target location. A 301 status code does not have to do this. Most browsers/clients change the POST request to a GET request. See RFC7238, Section 3 for more information.         
+        
+        
+     **Reference**    
+
+        https://www.youtube.com/watch?v=cGXRK6xVUGw&list=PLoqCAsfoCubrObEWVK2zHtdb5D-YUv9G5&index=11
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
 
 
 
