@@ -172,6 +172,183 @@
 
         
         
+    ## 4xx: Client Error
+
+    A 4xx Client Error status code means that the website or the page could not be reached and either the page is unavailable or the request contains bad syntax. As a website owner you should do your best to avoid these, as it means your users will not find what they're looking for. This can be either pages that are no longer found and are either temporarily or permanently gone. Besides giving a bad user experience, it can also hurt your SEO efforts.
+
+
+    400: “Bad Request.” 
+
+    The server can’t return a response due to an error on the client’s end. See our guide for resolving this error.
+    The 400 Bad Request status code means that the server could not understand the request because of invalid syntax.
+
+    A 400 Bad Request error status code means that the server cannot process the request due to an issue from the client. This could be due to any number of reasons, such as a file being too large, bad syntax, an invalid URL, or some other issue caused by a third-party application, which is why the 400 status code is sometimes uses as a catch all status code, even if there is an issue on the server-side. This can make troubleshooting a 400 status code a bit more time consuming and difficult, however, along with the 400 status code error and header information, the server can provide additional response along with it, which can be displayed to the user to help identify the issue and ease the process of troubleshooting and diagnosing the error. See RFC7231, Section 6.5.1 for more information. 
+
+
+    401: “Unauthorized” or “Authorization Required.” 
+
+    This is returned by the server when the target resource lacks valid authentication credentials. You might see this if you’ve set up basic HTTP authentication using htpasswd.
+
+    The 401 Unauthorized status code means that the request has not been applied because the server requires user authentication.
+
+    A 401 Unauthorized error status code indicates that the request does not include the appropriate authentication credentials, authentication has failed, or the user must log in. The client requires authentication from the server. The terms authorized and authenticated are often use interchangeably, but they mean separate things. A status code of 401 is strictly concerned with authentication. In cases where you would want to inform a client that they are not allowed at all, then a status code of 403 should be implemented. According to the specification, the 401 status code must also include the WWW-Authenticate header from the server response, indicating to the client what authentication scheme or method the server requires. See RFC7235, Section 3.1 for more information.  
+
+
+    402: “Payment Required.” 
+
+    Originally, this code was created for use as part of a digital cash system. However, that plan never followed through. Instead, it’s used by a variety of platforms to indicate that a request cannot be fulfilled, usually due to a lack of required funds. Common instances include:
+    You’ve reached your daily request limit to the Google Developers API.
+    You haven’t paid your Shopify fees and your store has been temporarily deactivated.
+    Your payment via Stripe has failed, or Stripe is trying to prevent a fraudulent payment.
+
+    The 402 Payment Required status code is a response reserved for future use. It was originally created to be implemented in digital payment systems, however, it is rarely used and a standard convention of using it does not exist.
+
+    Originally created as part of a way to allow for potential future digital payment methods, the 402 Payment Required error status code is officially reserved for future use, but it used some limited, but rare, situations. For more information on the 402 Payment Required error code, see RFC7231, Section 6.5.2   
+
+
+    403: “Access to that resource is forbidden.” 
+
+    This code is returned when a user attempts to access something that they don’t have permission to view. For example, trying to reach password-protected content without logging in might produce a 403 error.
+
+    The 403 Forbidden status code means that the client request has been rejected because the client does not have rights to access the content. Unlike a 401 error, the client's identity is known to the server, but since they are not authorized to view the content, giving the proper response is rejected by the server.
+
+    The 403 Forbidden error status code indicates that the request from the client was understood, but the server will not authorize it, so the client cannot access it. The server can make known the reason it will not authorize the request within the response, which could be due to various reasons like incorrect password or username. Unlike the 401 status code, which require authentication, a 403 status code can indicate that the client truly does not have authorization to access those resources, so authentication in this instance is not possible. See RFC7231, Section 6.5.3 for more information. 
+
+
+    404: “The requested resource was not found.” 
+    
+    This is the most common error message of them all. This code means that the requested resource does not exist, and the server does not know if it ever existed.
+
+    The 404 Not Found status code means that the server either did not find a current representation for the requested resource or is trying to hide its existence from an unauthorized client.
+
+    When looking at things SEO-wise the 404 Not Found status code pages with a high volume of traffic should be redirected using a 301 to the most relevant page possible. For some pages, however, a 404 might be necessary, for example, if the product is out of stock for an extended period of time. If you have external links pointing to a page that returns 404, you will lose the link equity those links would otherwise give.
+
+    One of the most common and infamous status codes encountered by users and developers, the 404 Not Found error status code indicates that the resource required from the server does not exist or is not willing to provide it to the client. A 404 status code will not indicate whether the lack of providing the resource is temporarily or permanently, but the client can make subsequent requests to access it. In cases where its known that the resources are permanently gone, the 410 status code should be used. 404 status codes, by default, are also cacheable, unless other cache controls are in place. See RFC7231, Section 6.5.4 for more information. 
+
+
+    405: “Method not allowed.” 
+    
+    This is generated when the hosting server (origin server) supports the method received, but the target resource doesn’t.
+
+    The 405 Method Not Allowed status code means that while the server knows the request method, the method has been disabled and can not be used.
+
+    The 405 Method Not Allowed error status code indicates that a specific resource requested by the client is not supported by the server. The 405 Method Not Allowed is like the 403 Forbidden status code, however, the 403 status code indicates that the resource may be available, it is just that the client does not have the necessary authorization to carry out the request. Along with the 405 Method Not Allowed status, the server must indicate the appropriate and supported methods for the target resource. For more information on the 405 Method Not Allowed error code, see RFC7231, Section 6.5.5  
+
+
+    406: “Not acceptable response.” 
+    
+    The requested resource is capable of generating only content that is not acceptable according to the accept headers sent in the request.
+
+    The 406 Not Acceptable status code is sent by the server when it does not find any content following the criteria given by the user agent.
+
+    Like the 405 Method Not Allowed error status code, the 406 Not Acceptable error code indicates that there is not support for a specific request. In this case the 406 Not Acceptable status code indicates that the server understood the request, but the response is not supported or understood by the client. A client can request specific versions of a resource in the header, such as A-IM or Accept Language, among others, but if the server does not support it, it responds with the 406 Not Acceptable status code. The server can either respond with a list of appropriate resource identifiers that the client can choose from. See RFC7231, Section 6.5.6 for more information.  
+
+
+    407: “Proxy Authentication Required.” 
+    
+    A proxy server is in use and requires your browser to authenticate itself before continuing.
+
+    The 407 Proxy Authentication Required status code means that the client must first be authenticated by a proxy (similar to a 401).
+
+    The 407 Proxy Authentication Required error status code is like the 401 Unauthorized status code, however, in the case of a 407 status code, in order to use a proxy, the client must first be authenticated. The proxy must return the method for authentication. Not as common today due to the rise of VPNs, proxies act as intermediaries between users/clients and the Internet, allowing users to access resources more quickly, as content is typically cached, and can also provide a layer of security and anonymity for users. For more information on the 407 Proxy Authentication Required error code, see RFC7235, Section 3.2  
+
+
+    408: “The server timed out waiting for the rest of the request from the browser.” 
+    
+    This code is generated when a server times out while waiting for the complete request from the browser. In other words, the server didn’t get the full request that was sent by the browser. One possible cause could be net congestion resulting in the loss of data packets between the browser and the server.
+
+    The 408 Request Timeout status code means that the server did not receive a complete request in the time that it prepared to wait.
+
+    A 408 Request Timeout error status code means that the server did not receive a request from the client in a specified amount of time. A delayed request from the client can be due for a variety of reasons, such as a slow or broken connection. Once that time has passed, the 408 Request Timeout status is sent by the server and the user/client can resend the request again. For more information on the 408 Request Timeout error code, see RFC7231, Section 6.5.7 
+
+
+    409: “Conflict.” 
+    
+    A 409 status code means that the server couldn’t process your browser’s request because there’s a conflict with the relevant resource. This sometimes occurs due to multiple simultaneous edits.
+
+    The 409 Conflict status code means that the request could not be fulfilled due to a conflict with the current state of the target resource and is used in situations where the user might be able to resubmit the request after resolving the conflict.
+
+    A 409 Conflict error status code indicates that the request from the client could not be processed due to a conflict with the server. The request from the client was fine, but there were issues on the server-side that prevents the request from being executed. An example of this could be if there was a request for a specific file to be edited, deleted, or created by the user, but those functionalities are not allowed. Along with the 409 response, the server should return instructions on how the user can resolve this issue or indicate why the issue is occurring. See RFC7231, Section 6.5.8 for more information. 
+
+
+
+    410: “The requested resource is gone and won’t be coming back.” 
+    
+    This is similar to a 404 “Not Found” code, except a 410 indicates that the condition is expected and permanent.
+
+    The 410 Gone status code means that the target resource has been deleted and the condition seems to be permanent. 
+
+    When looking at things SEO-wise the 410 Gone status code is a more permanent version a 404. The page will no longer be available from the server and has no forwarding address available. If you want to completely remove a page from Googles search index, then using 410 on a page is the proper way of doing it (instead of simply 404). 
+
+    Like the 404 Not Found error status code we covered earlier, the 410 Gone status code indicates that the resource the client is requesting has been removed and no longer available from the server. No further information is provided in terms of URL redirection or where to access the resource. It has been removed indefinitely. For more information on the 410 Gone error code, see RFC7231, Section 6.5.9  
+
+    411: “Length Required.” 
+    
+    This means that the requested resource requires that the client specify a certain length and that it did not.
+
+    The 411 Length Required status code means that the server has rejected the request because it requires the Content-Length header field to be defined.
+
+    The 411 Length Required error status code indicates that the server does not allow the request from the client due to a predefined request body content length. The request can be repeated by the client if a valid Content-Length header is specified in the subsequent resource request. For more information on the 411 Length Required error code, see RFC7231, Section 6.5.10  
+
+
+    412: “Precondition Failed.” 
+
+    Your browser included certain conditions in its request headers, and the server did not meet those specifications.
+
+    The 412 Precondition Failed status code means the server does not meet one or multiple preconditions that were indicated in the request header fields.
+
+    Conditional requests to the server are allowed as part of the HTTP protocol. If the right conditions are met in the request, the request is executed and processed by the server. A 412 Precondition Failed error status code means that one, or several, conditions in the request header has failed. For example, this can be used in GET requests and a conditional request is utilized to return the resource only if that resource has changed. For more information on the 412 Precondition Failed error code, see RFC7232, Section 4.2  
+
+
+    413: “Payload Too Large” or “Request Entity Too Large.” 
+    
+    Your request is larger than the server is willing or able to process.
+
+    The 413 Payload Too Large status code means the server refuses to process the request because the request payload is larger than the server is able or willing to process. While the server may close the connection to prevent the client from continuing the request, it should generate a Retry-After header field and after how long can the client retry.
+
+    The 413 Request Entity Too Large error status code indicates that the server will not accept and process the request due to the request body being larger than the server will allow or can process. Such examples include uploading a file where the file exceeds the maximum upload size set by the server or when the maximum number of uploads has been exceeded. In cases where the 413 Request Entity Too Large error occurs, the server may close the connection completely to prevent the client from continuing to sending the request. In some cases, it is likely the server would allow the client to retry the request, if itis a temporary condition, and should include that message back to the client. However, it is possible the request could cause the server itself to run out of physical disk space. In this case, the 507 Insufficient Storage error is the response that the client should receive back. See RFC7231, Section 6.5.11 for more information.  
+
+    414: “URI Too Long.” 
+    
+    This is usually the result of a GET request that has been encoded as a query string that is too large for the server to process.
+
+    The 414 URI Too Long status code means that the server is refusing to service the request because the request-target was longer than the server was willing to interpret.
+
+    Not a very common server response, the 414 URI Too Long error status code means that the server refused the client request due to the URL being longer than the server can process. Browsers and search engines do put limits on the length of URLs, partly to avoid DDoS attacks or code errors, but the path of a URL or HTTP does not have explicit limits. So, if limit exceeds what is set by the server, the 414 URI Too Long error will occur. For more information on the 414 URI Too Long error code, see RFC7231, Section 6.5.12  
+
+    415: “Unsupported Media Type.” 
+    
+    The request includes a media type that the server or resource doesn’t support.
+
+    The 415 Unsupported Media Type status code means that the server is rejecting the request because it does not support the media format of the requested data.
+
+    The 415 Unsupported Media Type error status code indicates the server cannot process the request body, or part of the request body, due to an unsupported media format. Even if the request from the client is supported, the 415 error may be returned if there is unsupported content in the body of the request. A 415 Unsupported Media Type error code is like the 406 Not Acceptable status code. The difference is that a 406 Not Acceptable error code is not due to the content in the header or encoding, rather, it is due to the value set within the HTTP header. Ensuring that the server can process the defined format along with sending the request with the correct form will avoid a 415 Unsupported Media Type error status code from happening. See RFC7231, Section 6.5.13 for more information. 
+
+    416: “Range Not Satisfiable.” 
+    
+    Your request was for a portion of a resource that the server is unable to return.
+
+    The 416 Range Not Satisfiable status code means that the range specified in the Range header field of the request can't be fulfilled. The reason might be that the given range is outside the size of the target URI's data.
+
+    As mentioned with the 206 Partial Request status code, it is possible for clients/browsers to request a partial response back from the server, whether it is a specific part of a file or video for example. Clients and servers use what is called range requests to execute these requests. However, if the server does not support these types of requests, it will simply return the entire resource along with a 200 OK response. If the server does support range requests, that is where the 416 Partial Request error status code enters the picture and will return what the client is asking for. In a situation where the server does support range requests, but the server does not agree with the request received because it does not fall within the range or possibly beyond the specified range, the 416 Range Not Satisfiable error status code will be returned. See RFC7233, Section 4.4 for more information.  
+
+    417: “Expectation Failed.” 
+    
+    The server is unable to meet the requirements specified in the request’s expect header field.
+
+    The 417 Expectation Failed status code means that the Expectation indicated by the Expect request-header field could not be met by the server.
+
+    Clients can use an Expect header to indicate that it expects specific behavior from the server. Like described in the 100 Continue status code, clients can check with the server if it will accept a request. If it does, the server will respond with the 100 Continue status code. If not, the 417 Expectation Failed error status code indicates that the server did not understand the Expect header or support it, therefore it cannot process the client request. For more information on the 417 Expectation Failed error code, see RFC7231, Section 6.5.14  
+
+    418: “I’m a teapot.” 
+    
+    This code is returned by teapots that receive requests to brew coffee. It’s also an April Fool’s Joke from 1998.
+
+    The 418 I'm a Teapot status code means that the server refuses to brew coffee because it is, in fact, a teapot. (It is a reference to a 1998 April Fools' joke called ''Hyper Text Coffee Pot Control Protocol'').
+
+    Error status codes 418-421 are currently unassigned, however, status code 418 I’m a Little Teapot is used in some instances. Created as an April Fool’s joke, it has gained some traction and is sometimes used as a joke or Easter egg and not used for actual everyday purposes. Most browsers ignore it as it is not an official status code. Another one in this category is the 420 Enhance Your Calm error status code that was introduced by Twitter. It is an error code that tells clients that they are being rate limited, which is a restriction on the number of requests they can make within a specified time period. Since 1989, the RFC Editor will publish the more humorous RFCs. Wikipedia has a full rundown of the more humorous April Fool’s RFCs. 
+
+
         
         
         
