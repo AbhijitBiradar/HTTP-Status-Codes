@@ -35,16 +35,25 @@ A 1xx Informational status code means that the server has received the request a
 
 This means that the server in question has received your browser’s request headers, and is now ready for the request body to be sent as well. This makes the request process more efficient since it prevents the browser from sending a body request even though the headers have been rejected.
 
+100 Continue, this response means everything is functioning properly and can proceed. The code indicates the server is processing the request and can complete it. The 100 code is an interim response and tells you the request has not caused an error.
+
 
 ### HTTP Status Code 101: “Switching protocols.”
 
 Your browser has asked the server to change protocols, and the server has complied.
+
+101 Switching Protocol, the server received the data request and can comply. The server, however,
+will change protocols based on information in the Upgrade header field. This status code does not
+indicate an error.
 
 
 ### HTTP Status Code 102: "Processing".
 
 The 102 Processing status code means that the server has accepted the full request but has not yet completed it and no response is available as of  yet.
 An interim response used to inform the client that the server has accepted the complete request but has not yet completed it.
+
+102 Processing, the server received the request, but there isn't any response yet. The server is
+processing the request, which is ongoing. This code also indicates an error has not occurred.
 
 
 ### HTTP Status Code 103: “Early hints.”
@@ -83,14 +92,26 @@ The 202 Accepted status code means that the server has received a request for pr
 
 The 203 Non-Authoritative Information status code is typically used by an HTTP proxy or third party. The proxy, sitting between the client and server may change the responses before reaching the client. To indicate that something was changed during the process, a status code 203 is used. However, the drawback of this method is that it is not possible to know what the original status code was if a proxy changed something in the response. A suggested workaround is to use a warning header along with a 214 status code, which is used to indicate that there was a change or modification in the response. Using the warning header allows the original status code to passed through
 
+203 Non-Authoritative Information, the returned data does not match the data available on the
+server. This often can indicate the data arrived via a proxy source of the server that contained the
+original data. This code means the server received a 200 OK from its origin, but it's returning a
+modified version of the response.
+
 
 ### HTTP Status Code 204: “No Content”.
 
 A status code of 204 indicates that the response has been successfully delivered by the server and fulfilled and no further content is to be sent in the body of the response. As an example, if the request is sent in the form on a page, once the response is sent, the client/browser is not supposed to change the view, meaning the form should not be refreshed or direct users to a new page. No additional content should be replaced or appear in terms of the user’s perspective
 
+204 No Content, the server sends this code when it received and understood the request. With this
+code, though, the server is signaling it has no data to return. Even though there's no content to send,
+this code indicates the HTTP headers are proper.
+
 ### HTTP Status Code 205: “Reset Content”.
 
 Like the 204 No Content status code, a status code 205 Reset Content indicates that the server has sent the request successfully and requires the user agent to refresh/reset the view to its original state. If we use the example of a form on a page, once the user completes and submits the form, the client/browser should clear the form back to its original state so a user can take further action. A 205 status code assumes no further content will be provided.
+
+205 Reset Content, the server has completed the request, but there was a problem. This status code
+represents a correctable error. You can solve this by resetting the document view and trying again.
 
 
 ### HTTP Status Code 206: “Partial Content”. 
@@ -113,12 +134,20 @@ https://www.youtube.com/watch?v=Q-0Rd-la7PQ&list=PLoqCAsfoCubrObEWVK2zHtdb5D-YUv
    Sometimes, there may be multiple possible resources the server can respond with to fulfill your browser’s request. A 300 status code means that your browser now needs to choose between them. This may occur when there are multiple file type extensions available, or if the server is experiencing word sense disambiguation.
 
   The 300 Multiple Choices status code indicates that a resource has moved and can redirect to multiple locations. In this case the user must decide which resource to use. The server may indicate a preferred choice and that should be indicated in the header field where the user agent could redirect to the preferred choice automatically. In practical use, this status code is rarely used as there is no standardized way to choose from multiple responses. See RFC7231, Section 6.4.1 for more information. 
+  
+300 Multiple choices, The request has more than one potential response. The server often sends a
+report with this code that includes a list of the potential choices. To get the data, you can choose
+from the responses the server provides.  
 
 ### HTTP Status Code 301: Moved Permanently
 
   “The requested resource has been moved permanently.” This code is delivered when a web page or resource has been permanently replaced with a different resource. It is used for permanent URL redirection.
 
    A 301 Moved Permanently status code is utilized to indicate that a target resource has been moved to a permanent location. The 301 status code tells the browser/client to use this new location or URL going forward in the header. Along with the 301 status code, the new URL will be given in the response as well as update any URLs in the previous location(s), along with updating to the new URL. See RFC7231, Section 6.4.2 for more information.
+   
+301 Moved permanently, This code indicates the URL no longer exists or is broken. This message
+often includes the new URL for you to use. It also signifies to the user to update all references to this
+URL.   
 
 
 ### HTTP Status Code 302: Found
@@ -127,6 +156,9 @@ https://www.youtube.com/watch?v=Q-0Rd-la7PQ&list=PLoqCAsfoCubrObEWVK2zHtdb5D-YUv
 
   A 302 Found status code indicates to a client/browser that a resource that they are accessing is temporarily located under a different location. Unlike the 301 status code, a 302 status code indicates a temporary move, so the client should not automatically update its links to the new location, as again, it is meant to be temporary. An example of where the 302 status code should be used if there are multiple URLs, but they could be served in different languages. A user may arrive at specific URL, but the client may redirect them automatically to the proper page based on their browser settings and use this on subsequent visits. It is noted that in some cases, browsers may change a request from POST to GET. In the case that this action is not favorable, a 307 status code should be used. See RFC7231, Section 6.4.3 for more information.  
 
+302 Found, The Uniform Resource Identifier (URI) changed, but the change is not permanent. A 302
+Found means more changes might occur in the future, so consider using the new URI to complete
+requests. This code is one way to create a temporary redirect.
 
 ### HTTP Status Code 303: See Other
 
@@ -146,6 +178,9 @@ https://www.youtube.com/watch?v=Q-0Rd-la7PQ&list=PLoqCAsfoCubrObEWVK2zHtdb5D-YUv
 
   The 305 Use Proxy status code is a deprecated status code that is no longer used due to security consideration. It was used to indicate to a client that the resource they were accessing must be accessed via a proxy. For more information on the 305 Use Proxy status code, see RFC7231, Section 6.4.5         
 
+305 Use proxy, The request needs to use a server proxy to complete successfully. This message tells
+the user to send the request again. The second request will go to the server proxy, which can
+provide the data.
 
 ### HTTP Status Code 306: Unused
 
@@ -158,6 +193,9 @@ https://www.youtube.com/watch?v=Q-0Rd-la7PQ&list=PLoqCAsfoCubrObEWVK2zHtdb5D-YUv
 
   Like the 302 Found redirect status code, the 307 Temporary Redirect status code indicates to the client/browser that a resource or document is available at a different, temporary URL and returns that URL. Since the redirection is temporary and could change, the browser/client should continue to access the current URL for subsequent requests. The main difference between the 302 status code and the 307 status code is that the 307 status code does not allow changing requests from a POST request to a GET request, so if the client requested POST request, it be redirected and initiate the POST request again. See RFC7231, Section 6.4.7          
 
+307 Temporary redirect, This response means the Uniform Resource Identifier is different. The
+server has to use a new, temporary URI to return data. This code also indicates future requests
+likely won't use the temporary URI and will function as normal.
 
 ### HTTP Status Code 308: “Permanent Redirect.”
 
@@ -184,6 +222,9 @@ The 400 Bad Request status code means that the server could not understand the r
 
 A 400 Bad Request error status code means that the server cannot process the request due to an issue from the client. This could be due to any number of reasons, such as a file being too large, bad syntax, an invalid URL, or some other issue caused by a third-party application, which is why the 400 status code is sometimes uses as a catch all status code, even if there is an issue on the server-side. This can make troubleshooting a 400 status code a bit more time consuming and difficult, however, along with the 400 status code error and header information, the server can provide additional response along with it, which can be displayed to the user to help identify the issue and ease the process of troubleshooting and diagnosing the error. See RFC7231, Section 6.5.1 for more information. 
 
+400 Bad request, this code indicates invalid syntax prevented the server from receiving a request.
+Servers return this code when the requester made the error and should correct it before trying
+again. This could mean the client used invalid message framing or improperly routed the message.
 
 ### HTTP Status 401 : “Unauthorized” or “Authorization Required.” 
 
@@ -193,6 +234,9 @@ The 401 Unauthorized status code means that the request has not been applied bec
 
 A 401 Unauthorized error status code indicates that the request does not include the appropriate authentication credentials, authentication has failed, or the user must log in. The client requires authentication from the server. The terms authorized and authenticated are often use interchangeably, but they mean separate things. A status code of 401 is strictly concerned with authentication. In cases where you would want to inform a client that they are not allowed at all, then a status code of 403 should be implemented. According to the specification, the 401 status code must also include the WWW-Authenticate header from the server response, indicating to the client what authentication scheme or method the server requires. See RFC7235, Section 3.1 for more information.  
 
+401 Unauthorized, the server cannot complete the request. The server believes the user does not
+have the authorization to receive the data. After sending this code, a server won't complete the
+request until user authentication happens.
 
 ### HTTP Status 402 : “Payment Required.” 
 
@@ -214,6 +258,9 @@ The 403 Forbidden status code means that the client request has been rejected be
 
 The 403 Forbidden error status code indicates that the request from the client was understood, but the server will not authorize it, so the client cannot access it. The server can make known the reason it will not authorize the request within the response, which could be due to various reasons like incorrect password or username. Unlike the 401 status code, which require authentication, a 403 status code can indicate that the client truly does not have authorization to access those resources, so authentication in this instance is not possible. See RFC7231, Section 6.5.3 for more information. 
 
+403 Forbidden, the server understood the request, but it is refusing to fulfill it. Sometimes, the user
+does not have access to the requested content or data, and the server rejects the request. This also
+can mean the client needs an account to request data or the request would create a duplicate record.
 
 ### HTTP Status 404 : “The requested resource was not found.” 
 
@@ -225,6 +272,9 @@ When looking at things SEO-wise the 404 Not Found status code pages with a high 
 
 One of the most common and infamous status codes encountered by users and developers, the 404 Not Found error status code indicates that the resource required from the server does not exist or is not willing to provide it to the client. A 404 status code will not indicate whether the lack of providing the resource is temporarily or permanently, but the client can make subsequent requests to access it. In cases where its known that the resources are permanently gone, the 410 status code should be used. 404 status codes, by default, are also cacheable, unless other cache controls are in place. See RFC7231, Section 6.5.4 for more information. 
 
+404 Not found, the 404 error is one of the most common codes servers send. The error means the
+server can't find information in that location now, but it might be able to in the future. It also can
+occur when a page has a new location, but a user didn't provide the old one with a redirect.
 
 ### HTTP Status 405 : “Method not allowed.” 
 
@@ -261,6 +311,9 @@ The 408 Request Timeout status code means that the server did not receive a comp
 
 A 408 Request Timeout error status code means that the server did not receive a request from the client in a specified amount of time. A delayed request from the client can be due for a variety of reasons, such as a slow or broken connection. Once that time has passed, the 408 Request Timeout status is sent by the server and the user/client can resend the request again. For more information on the 408 Request Timeout error code, see RFC7231, Section 6.5.7 
 
+408 Request timeout, this code means a request took too long to process. It also could indicate the
+request didn't make it through to the server. Sometimes, internet problems can interrupt the
+process, but the user can try again.
 
 ### HTTP Status 409 : “Conflict.” 
 
@@ -281,6 +334,10 @@ The 410 Gone status code means that the target resource has been deleted and the
 When looking at things SEO-wise the 410 Gone status code is a more permanent version a 404. The page will no longer be available from the server and has no forwarding address available. If you want to completely remove a page from Googles search index, then using 410 on a page is the proper way of doing it (instead of simply 404). 
 
 Like the 404 Not Found error status code we covered earlier, the 410 Gone status code indicates that the resource the client is requesting has been removed and no longer available from the server. No further information is provided in terms of URL redirection or where to access the resource. It has been removed indefinitely. For more information on the 410 Gone error code, see RFC7231, Section 6.5.9  
+
+410 Gone, the information a user requested from the server no longer exists. This code means the
+information existed at some point, but it doesn't anymore. The server also can't tell you whether the
+information exists somewhere else.
 
 ### HTTP Status 411 : “Length Required.” 
 
@@ -368,6 +425,8 @@ When looking at things SEO-wise the 500 Internal Server Error indicates a proble
 
 The 500 Internal Server Error status code simply means that the server encountered an issue and cannot process the request. Typically, the 500 Internal Server Error code used more as a generic server error code if the exact issue does not fall within any of the other 5xx Server Error status code specifications. The 500 Internal Server Error code is probably the most used of the 5xx Server Error classification codes. See RFC7231, Section 6.6 for more information. 
 
+500 Internal Server Error, a generic error message, is given when an unexpected condition was
+encountered and no more specific messages are suitable.
 
 ### HTTP Status Code 501: Not Implemented
 
@@ -375,7 +434,8 @@ A 501 Not Implemented error status codes occurs when the server does not recogni
 
 The 501 Not Implemented response code means that the request can not be handled because it is not supported by the server.
 
-
+501 Not Implemented, the server either does not recognize the request method or lacks the ability to
+fulfill the request. Usually, this implies future availability (e.g., a new feature of a web-service API).
 
 ### HTTP Status Code 502: “Bad Gateway.” 
 
@@ -385,6 +445,8 @@ The 502 Bad Gateway error status code means that a server is acting a proxy and 
 
 The 502 Bad Gateway response code means that the server received an invalid response while working as a gateway to handle the response.
 
+502 Bad Gateway, the server was acting as a gateway or proxy and received an invalid response
+from the upstream server.
 
 ### HTTP Status Code 503: “The server is unavailable to handle this request right now.” 
 
@@ -396,7 +458,8 @@ The 503 Service Unavailable response code means that the server is currently not
 
 When looking at things SEO-wise the 503 Service Unavailable status code means that the server is unavailable and the visitor, bot or human, is asked to return again at a later time. This could be because of either server maintenance or server overload and search engines know to come back and check the availability later.
 
-
+503 Service Unavailable, the server cannot handle the request (because it is overloaded or down for
+maintenance). Generally, this is a temporary state
 
 ### HTTP Status Code 504: “The server, acting as a gateway, timed out waiting for another server to respond.” 
 
@@ -406,7 +469,8 @@ Like the 502 Bad Gateway error status code, the 504 Gateway Timeout error status
 
 The 504 Gateway Timeout response code means that the server acting as a gateway could not get a response time.
 
-
+504 Gateway Timeout, the server was acting as a gateway or proxy and did not receive a timely
+response from the upstream server
 
 ### HTTP Status Code 505: “HTTP Version Not Supported.” 
 
@@ -416,7 +480,8 @@ A 505 HTTP Version Not Supported error status code means that the server does no
 
 The 505 HTTP Version Not Supported response code means that the version of HTTP used in the request is not supported by the server.
 
-
+505 HTTP Version Not Supported, the server does not support the HTTP protocol version used in
+the request.
 
 ### HTTP Status Code 506: Variant Also Negotiates
 
